@@ -6,6 +6,10 @@ variable location {
     description = "The location in which the resources are deployed such as east US, west Europe"
 }
 
+variable account_tier {
+    description = "Account Tier"
+}
+
 variable storage_account_tier {
     description = "Stoarge Account Tier"
 }
