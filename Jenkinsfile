@@ -20,6 +20,10 @@ pipeline {
       steps {
         script {
             withCredentials([string(credentialsId: 'MY_SUBSCRIPTION_ID', variable: 'ID')]){
+              withDockerRegistry(credentialsId: 'DOCKER_ID')  {
+                              // Pull the Docker image from the registry
+                docker.image(TF_DOCKER_IMAGE).pull()
+                docker.image(TF_DOCKER_IMAGE).inside() {
                   sh 'az login --identity'
                   sh 'az account set -s "${MY_SUBSCRIPTION_ID}"'
                   for (stack in TF_STACK) {
@@ -49,7 +53,8 @@ pipeline {
                     else
                       echo " terraform.tfvars doesn't exists in stack: ${stack} "
                   }
-       
+                }
+              }
             }
         }
       }
