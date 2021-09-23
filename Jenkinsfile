@@ -37,7 +37,7 @@ pipeline {
                       def ret = sh(script: "cd ${TF_EXEC_PATH} && ${TF_COMMAND}", returnStatus: true)
                       println "TF plan exit code: ${ret}. \n INFO: 0 = Succeeded with empty diff (no changes);  1 = Error; 2 = Succeeded with non-empty diff (changes present)"
                       if ( "${ret}" == "0" ) {
-                        sh "cd ${TF_EXEC_PATH} && ${TF_COMMAND2}"
+                        echo "Everything is in check"
                       }
                       else if ( "${ret}" == "1" ) {
                         error("Build failed because TF plan for ${stack} failed..")
