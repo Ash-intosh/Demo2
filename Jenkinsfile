@@ -20,7 +20,7 @@ pipeline {
       steps {
         script {
             withCredentials([string(credentialsId: 'MY_SUBSCRIPTION_ID', variable: 'ID')]){
-              withDockerRegistry(credentialsId: 'DOCKER_ID', url: 'DOCKER_REGISTRY')  {
+              withDockerRegistry(credentialsId: 'DOCKER_ID')  {
                               // Pull the Docker image from the registry
                 docker.image(TF_DOCKER_IMAGE).pull()
                 docker.image(TF_DOCKER_IMAGE).inside() {
