@@ -46,7 +46,9 @@ pipeline {
             }
         }
         stage("Closure"){
-            echo "Closure stage"
+            steps{
+                echo "Closure stage"
+            }
         }
     }
      post {
