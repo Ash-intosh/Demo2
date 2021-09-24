@@ -2,6 +2,9 @@ def TF_STACK = ["storage"]
 
 pipeline {
     agent any
+    tools {
+        terraform 'terraform'
+    }
 
     stages {
         stage('Hello') {
