@@ -9,11 +9,15 @@ terraform {
 provider "azurerm" {
   features {}
 
-  subscription_id = "d7eb1cba-f5ff-4f6d-9eca-2725372f0266"
-  tenant_id       = "76a2ae5a-9f00-4f6b-95ed-5d33d77c4d61"
-  client_id       = "443958e0-35dd-4e84-9165-0179f50b6c32"
-  client_secret   = "ZY5LElD~gG7dpZcADk4XhHEf4gHKak2toy"
-  
+  use_msi = true
+
+  backend "azurerm" {
+    storage_account_name = "csg100320015b8221a2"
+    container_name       = "demotstate"
+    key                  = "terraform.tfstate"
+    subscription_id      = "d7eb1cba-f5ff-4f6d-9eca-2725372f0266"
+    tenant_id            = "76a2ae5a-9f00-4f6b-95ed-5d33d77c4d61"
+  }
 }
 
 resource "random_string" "uid" {
