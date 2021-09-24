@@ -1,5 +1,9 @@
 def TF_STACK = ["storage"]
 
+environment {
+    ARM_USE_MSI = true
+  }
+
 pipeline {
     agent any
     tools {
