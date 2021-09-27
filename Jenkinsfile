@@ -22,7 +22,7 @@ pipeline {
                         '''
                         for (stack in TF_STACK) {
                             def TF_EXEC_PATH = stack
-                            def TF_BACKEND_CONF = "-backend-config='storage_account_name=csg100320015b8221a2' -backend-config='resource_group_name=cloud-shell-storage-centralindia' -backend-config='container_name=demotstate' -backend-config='key=${stack}/terraform.tfstate'"
+                            def TF_BACKEND_CONF = "-backend-config='storage_account_name=csg100320015b8221a2' -backend-config='resource_group_name=cloud-shell-storage-centralindia' -backend-config='container_name=demotstate' -backend-config='key=terraform.tfstate'"
                             def TF_COMMAND = "terraform init ${TF_BACKEND_CONF}; terraform plan -var-file terraform.tfvars -detailed-exitcode;"
                             def TF_COMMAND2 = "terraform apply -auto-approve -var-file terraform.tfvars"
                             def exists = fileExists "${TF_EXEC_PATH}/terraform.tfvars"
