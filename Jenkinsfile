@@ -3,9 +3,13 @@ def TF_STACK = ["storage"]
 pipeline {
     agent any
     
+    parameters {
+        string defaultValue: 'terraform', name: 'File_Name'
+    }
+    
     environment {
     ARM_USE_MSI = true
-    FILENAME = 'terraform'
+    FILENAME = params.File_Name
    }
     
     tools {
