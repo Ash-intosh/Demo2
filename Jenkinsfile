@@ -7,9 +7,7 @@ pipeline {
     
     environment {
     ARM_USE_MSI = true
-        script{
     FILENAME = gv.File_Name()
-   }
     }
     
     tools {
