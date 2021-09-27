@@ -1,15 +1,11 @@
-import hudson.model.*
-
 def TF_STACK = ["storage"]
-
-def gv = load "script.groovy"
 
 pipeline {
     agent any
     
     environment {
     ARM_USE_MSI = true
-    FILENAME = gv.File_Name()
+    FILENAME = 'terraform'
     }
     
     tools {
