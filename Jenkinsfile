@@ -24,7 +24,7 @@ pipeline {
                         for (stack in TF_STACK) {
                             def TF_EXEC_PATH = stack
                             def TF_BACKEND_CONF = " -backend-config='access_key=${ARM_ACCESS_KEY}'"
-                            def TF_COMMAND = "terraform init ${TF_BACKEND_CONF}; terraform plan -var-file terraform.tfvars -detailed-exitcode;"
+                            def TF_COMMAND = "terraform init ${TF_BACKEND_CONF}; terraform plan -var-file ${env.FILENAME}.tfvars -detailed-exitcode;"
                             def TF_COMMAND2 = "terraform apply -auto-approve -var-file ${env.FILENAME}.tfvars"
                             def exists = fileExists "${TF_EXEC_PATH}/terraform.tfvars"
                             if (exists) {
