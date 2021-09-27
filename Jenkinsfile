@@ -1,3 +1,5 @@
+import hudson.model.*
+
 def TF_STACK = ["storage"]
 
 def gv = load "script.groovy"
