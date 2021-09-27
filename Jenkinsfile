@@ -14,7 +14,7 @@ pipeline {
         stage('Hello') {
             steps {
                 script{
-                    withCredentials([string(credentialsId: 'MY_SUBSCRIPTION_ID', variable: 'SUB_ID')]) {
+                    withCredentials([string(credentialsId: 'MY_SUBSCRIPTION_ID', variable: 'SUB_ID'), string(credentialsId: 'access_key', variable: 'ARM_ACCESS_KEY')]) {
                         sh '''
                             az login --identity
                             az account set -s $SUB_ID
@@ -22,7 +22,7 @@ pipeline {
                         '''
                         for (stack in TF_STACK) {
                             def TF_EXEC_PATH = stack
-                            def TF_BACKEND_CONF = "-backend-config='resource_group_name=cloud-shell-storage-centralindia' -backend-config='storage_account_name=csg100320015b8221a2' -backend-config='container_name=demotstate' -backend-config='key=terraform.tfstate'"
+                            def TF_BACKEND_CONF = " -backend-config='access_key=${ARM_ACCESS_KEY}'"
                             def TF_COMMAND = "terraform init ${TF_BACKEND_CONF}; terraform plan -var-file terraform.tfvars -detailed-exitcode;"
                             def TF_COMMAND2 = "terraform apply -auto-approve -var-file terraform.tfvars"
                             def exists = fileExists "${TF_EXEC_PATH}/terraform.tfvars"
