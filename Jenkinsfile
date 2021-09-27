@@ -1,15 +1,11 @@
 def TF_STACK = ["storage"]
 
-def gv = load "script.groovy"
-
 pipeline {
     agent any
     
     environment {
     ARM_USE_MSI = true
-        script{
-    FILENAME = gv.File_Name()
-   }
+    FILENAME = 'terraform'
    }
     
     tools {
@@ -31,7 +27,7 @@ pipeline {
                             def TF_BACKEND_CONF = " -backend-config='access_key=${ARM_ACCESS_KEY}'"
                             def TF_COMMAND = "terraform init ${TF_BACKEND_CONF}; terraform plan -var-file ${env.FILENAME}.tfvars -detailed-exitcode;"
                             def TF_COMMAND2 = "terraform apply -auto-approve -var-file ${env.FILENAME}.tfvars"
-                            def exists = fileExists "${TF_EXEC_PATH}/${FILENAME}.tfvars"
+                            def exists = fileExists "${TF_EXEC_PATH}/${env.FILENAME}.tfvars"
                             if (exists) {
                                 def ret = sh(script: "cd ${TF_EXEC_PATH} && ${TF_COMMAND}", returnStatus: true)
                                 println "TF plan exit code: ${ret}. \n INFO: 0 = Succeeded with empty diff (no changes);  1 = Error; 2 = Succeeded with non-empty diff (changes present)"
