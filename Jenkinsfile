@@ -17,7 +17,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'MY_SUBSCRIPTION_ID', variable: 'SUB_ID')]) {
                         sh '''
                             az login --identity
-                            az account set -s $AZURE_SUBSCRIPTION_ID
+                            az account set -s $SUB_ID
                             echo "Entered Azure"
                         '''
                         for (stack in TF_STACK) {
