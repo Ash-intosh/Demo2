@@ -1,12 +1,13 @@
 def TF_STACK = ["storage"]
 
-environment {
-    ARM_USE_MSI = true
-    FILENAME = 'terraform'
-  }
-
 pipeline {
     agent any
+    
+    environment {
+    ARM_USE_MSI = true
+    FILENAME = 'terraform'
+   }
+    
     tools {
         terraform 'terraform'
     }
