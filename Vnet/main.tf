@@ -12,7 +12,7 @@ resource "azurerm_virtual_network" "mvnet_demo" {
  
 # Create subnet
 resource "azurerm_subnet" "myterraformsubnet" {
-    name                 = subnet-${var.namespace}-demo
+    name                 = "subnet-${var.namespace}-demo"
     resource_group_name  = var.rg_name
     virtual_network_name = azurerm_virtual_network.mvnet_demo.name
     address_prefixes       = var.address_prefix
