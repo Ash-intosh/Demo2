@@ -1,4 +1,6 @@
-def TF_STACK = ["storage"]
+def TF_STACK = 
+    ["storage",
+    "Vnet"]
 
 pipeline {
     agent any
